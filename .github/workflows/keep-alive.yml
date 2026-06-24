@@ -1,0 +1,13 @@
+name: Twikoo定时保活
+on:
+  schedule:
+    # 每4小时执行一次（UTC时区）
+    - cron: "0 */4 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 访问接口保持数据库活跃
+        run: curl --max-time 10 https://twikoo-azure-five.vercel.app/api/twikoo
